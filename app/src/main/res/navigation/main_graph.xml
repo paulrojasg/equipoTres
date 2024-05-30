@@ -10,4 +10,9 @@
         android:name="com.example.project2.view.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.example.project2.view.fragment.CreateTaskFragment"
+        android:label="fragment_create_task"
+        tools:layout="@layout/fragment_create_task" />
 </navigation>
