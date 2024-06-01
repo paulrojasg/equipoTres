@@ -1,6 +1,7 @@
 package com.example.project2.data
 
 import android.util.Log
+import android.widget.Toast
 import com.example.project2.model.TodoTask
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
@@ -67,8 +68,10 @@ class TodoTaskDao() {
                 "category" to category,
                 "priority" to priority
             )
-        ).addOnFailureListener {
-            Log.d("Error", it.cause.toString())
+        ).addOnSuccessListener{
+            Log.d("TaskApp", "Task inserted successfully")
+        }.addOnFailureListener {
+            Log.d("TaskApp", "Task inserted successfully")
         }
 
     }
@@ -102,6 +105,8 @@ class TodoTaskDao() {
             "category" to category,
             "priority" to priority
         ))
+
+
 
     }
 

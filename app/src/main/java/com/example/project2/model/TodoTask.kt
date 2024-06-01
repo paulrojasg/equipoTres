@@ -8,4 +8,4 @@ data class TodoTask(
     val description: String,
     val category: String,
     val priority: String
-)  : Serializable
+): Serializable
