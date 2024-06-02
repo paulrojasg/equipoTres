@@ -15,4 +15,9 @@
         android:name="com.example.project2.view.fragment.CreateTaskFragment"
         android:label="fragment_create_task"
         tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.example.project2.view.fragment.EditFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit" />
 </navigation>
