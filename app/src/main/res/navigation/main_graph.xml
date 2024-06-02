@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/createTaskFragment">
+    app:startDestination="@id/viewTaskFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -17,16 +17,17 @@
         tools:layout="@layout/fragment_viewtask">
         <action
             android:id="@+id/action_fragment_viewtask_to_createTaskFragment"
-            app:destination="@id/editTaskFragment" />
-        <action
-            android:id="@+id/action_fragment_viewtask_to_editTaskFragment"
-            app:destination="@id/editTaskFragment" />
+            app:destination="@id/createTaskFragment" />
     </fragment>    
     <fragment
         android:id="@+id/createTaskFragment"
         android:name="com.example.project2.view.fragment.CreateTaskFragment"
         android:label="fragment_create_task"
-        tools:layout="@layout/fragment_create_task" />    
+        tools:layout="@layout/fragment_create_task" >
+        <action
+            android:id="@+id/action_createTaskFragment_to_viewTaskFragment"
+            app:destination="@id/viewTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editTaskFragment"
         android:name="com.example.project2.view.fragment.EditFragment"
