@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.map
+import androidx.navigation.fragment.findNavController
 import com.example.project2.databinding.FragmentCreateTaskBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.repository.TodoTaskRepository
@@ -102,7 +103,9 @@ class CreateTaskFragment : Fragment() {
 
                 app.insertTodoTasks(task)
                 app.getTodoTasks()
-                Log.d("custom", "hello there")
+                Log.d("TaskApp", "Task created")
+                Toast.makeText(context, "Tarea creada exitosamente", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_createTaskFragment_to_viewTaskFragment)
             }
 
 
