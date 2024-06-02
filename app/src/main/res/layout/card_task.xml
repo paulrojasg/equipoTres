@@ -72,25 +72,23 @@
 
                     <ImageButton
                         android:id="@+id/verButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:backgroundTint="#00FFFFFF"
-                        android:tint="#000000"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:contentDescription="Eliminar elemento"
                         app:srcCompat="@android:drawable/ic_menu_view" />
 
                     <ImageButton
                         android:id="@+id/editButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:tint="#000000"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:contentDescription="Eliminar elemento"
                         app:srcCompat="@android:drawable/ic_menu_edit" />
 
                     <ImageButton
                         android:id="@+id/deleteButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="#00FFFFFF"
-                        android:tint="#000000"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:contentDescription="Eliminar elemento"
                         app:srcCompat="@android:drawable/ic_menu_delete" />
 
                 </LinearLayout>
