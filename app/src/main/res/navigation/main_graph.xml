@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_viewtask">
         <action
             android:id="@+id/action_fragment_viewtask_to_createTaskFragment"
-            app:destination="@id/editTaskFragment" />
+            app:destination="@id/createTaskFragment" />
         <action
             android:id="@+id/action_fragment_viewtask_to_editTaskFragment"
             app:destination="@id/editTaskFragment" />
