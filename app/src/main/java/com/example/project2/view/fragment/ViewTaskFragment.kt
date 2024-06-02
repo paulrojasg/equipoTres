@@ -17,27 +17,27 @@ import com.example.project2.databinding.FragmentViewtaskBinding
 
 class ViewTaskFragment : Fragment() {
 
-    private lateinit var binding: FragmentViewtaskBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentViewtaskBinding.inflate(inflater)
-
-    }
-
-    private fun controladores() {
-        binding.buttonAdd.setOnClickListener {
-            try {
-                Log.e("Exito","It works")
-                findNavController().navigate(R.id.action_fragment_viewtask_to_createTaskFragment)
-            } catch(e: Exception) {
-                Log.e("Error","Navegación fallida",e)
-            }
-        }
-
-    }
+//    private lateinit var binding: FragmentViewtaskBinding
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        binding = FragmentViewtaskBinding.inflate(inflater)
+//
+//    }
+//
+//    private fun controladores() {
+//        binding.buttonAdd.setOnClickListener {
+//            try {
+//                Log.e("Exito","It works")
+//                findNavController().navigate(R.id.action_fragment_viewtask_to_createTaskFragment)
+//            } catch(e: Exception) {
+//                Log.e("Error","Navegación fallida",e)
+//            }
+//        }
+//
+//    }
 
 
 }
