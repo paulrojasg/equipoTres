@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -21,15 +21,18 @@
         android:minHeight="?attr/actionBarSize"
         app:contentInsetStart="10dp"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="@drawable/baseline_arrow_back_ios_24">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/abeezee"
             android:text="@string/edit_task_title"
             android:textColor="@color/white"
             android:textSize="25dp" />
