@@ -44,7 +44,6 @@ class CreateTaskFragment : Fragment() {
         setupSpinners()
         prepareListeners()
 
-
         return view
     }
 
