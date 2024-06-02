@@ -11,10 +11,19 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
+        android:id="@+id/viewTaskFragment"
+        android:name="com.example.project2.view.fragment.ViewTaskFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_viewtask">
+        <action
+            android:id="@+id/action_fragment_viewtask_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>    
+    <fragment
         android:id="@+id/createTaskFragment"
         android:name="com.example.project2.view.fragment.CreateTaskFragment"
         android:label="fragment_create_task"
-        tools:layout="@layout/fragment_create_task" />
+        tools:layout="@layout/fragment_create_task" />    
     <fragment
         android:id="@+id/editTaskFragment"
         android:name="com.example.project2.view.fragment.EditFragment"
