@@ -18,7 +18,7 @@ class TaskAdapter(private val listTask:MutableList<TodoTask>, private val navCon
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val appointment = listTask[position]
-        holder.setCardAppointment(appointment)
+        val task = listTask[position]
+        holder.setCardTask(task)
     }
 }

@@ -11,13 +11,13 @@ class TaskViewHolder(binding: CardTaskBinding, navController: NavController) :
     RecyclerView.ViewHolder(binding.root) {
     val bindingTask = binding
     val navController = navController
-    fun setCardAppointment(task: TodoTask) {
+    fun setCardTask(task: TodoTask) {
         bindingTask.taskName.text = task.name
 
         bindingTask.itemCardView.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("clave", task)
-            //navController.navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+            navController.navigate(R.id.action_fragment_viewtask_to_editTaskFragment, bundle)
         }
 
     }

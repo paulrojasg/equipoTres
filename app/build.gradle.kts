@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
@@ -64,7 +65,18 @@ dependencies {
     val fragment_version = "1.7.0"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
+    // LiveData
+    val liveDataVersion = "2.3.1"
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+
+    //lottiejson
+    val lottieVersion = "3.4.0"
+    implementation("com.airbnb.android:lottie:$lottieVersion")
 
 }
