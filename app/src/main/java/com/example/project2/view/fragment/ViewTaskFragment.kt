@@ -14,16 +14,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project2.R
 import com.example.project2.databinding.FragmentViewtaskBinding
-
+import com.google.firebase.firestore.FirebaseFirestore
+import com.example.project2.view.adapter.TaskAdapter
+import com.example.project2.viewmodel.TodoTaskViewModel
 class ViewTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentViewtaskBinding
+    private val app: TodoTaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentViewtaskBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        Log.d("Lista de tareas:", app.getTodoTasks().toString())
         return binding.root
     }
 
@@ -31,6 +36,13 @@ class ViewTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Funciones necesarias
         controladores()
+        observadorViewModel()
+        val callback = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                activity?.moveTaskToBack(true)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun controladores() {
@@ -44,5 +56,26 @@ class ViewTaskFragment : Fragment() {
         }
     }
 
+    private fun observadorViewModel(){
+        observerListTask()
+        observerProgress()
+    }
+
+    private fun observerListTask(){
+        app.listTodoTask
+        app.listTodoTask.observe(viewLifecycleOwner){ listTodoTask ->
+            val recycler = binding.recyclerview
+            val layoutManager = LinearLayoutManager(context)
+            recycler.layoutManager = layoutManager
+            val adapter = TaskAdapter(listTodoTask, findNavController())
+            recycler.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }
+    }
+    private fun observerProgress(){
+        app.progressState.observe(viewLifecycleOwner){status ->
+            binding.progress.isVisible = status
+        }
+    }
 
 }
