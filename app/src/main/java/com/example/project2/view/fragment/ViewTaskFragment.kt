@@ -24,7 +24,13 @@ class ViewTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentViewtaskBinding.inflate(inflater)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Funciones necesarias
+        controladores()
     }
 
     private fun controladores() {
@@ -36,7 +42,6 @@ class ViewTaskFragment : Fragment() {
                 Log.e("Error","Navegación fallida",e)
             }
         }
-
     }
 
 
