@@ -151,12 +151,13 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@drawable/rounded_create_input"
-            android:inputType="text"
-            android:maxLength="100"
-            android:singleLine="true"
+            android:inputType="textMultiLine"
+            android:maxLength="130"
             android:textStyle="italic"
             android:textSize="18sp"
-            android:fontFamily="@font/abeezee"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/abeezee"
+            android:gravity="top|start"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
