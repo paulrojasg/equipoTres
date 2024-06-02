@@ -11,12 +11,14 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.example.project2.R
 import com.example.project2.viewmodel.TodoTaskViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.map
+import androidx.navigation.fragment.findNavController
 import com.example.project2.databinding.FragmentCreateTaskBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.repository.TodoTaskRepository
@@ -82,10 +84,17 @@ class CreateTaskFragment : Fragment() {
     }
 
     private fun prepareListeners() {
+
+
+        val toolbar : Toolbar = binding.contentToolbar.toolbarEdit
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // Save button
         binding.btnSave.setOnClickListener {
-            val name = binding.etvName.text.toString()
-            val description = binding.etvDescription.text.toString()
+            val name = binding.etvName.editableText.toString()
+            val description = binding.etvDescription.editableText.toString()
             val category = categoryOption
             val priority = priorityOption
 
@@ -102,7 +111,9 @@ class CreateTaskFragment : Fragment() {
 
                 app.insertTodoTasks(task)
                 app.getTodoTasks()
-                Log.d("custom", "hello there")
+                Log.d("TaskApp", "Task created")
+                Toast.makeText(context, "Tarea creada exitosamente", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_createTaskFragment_to_viewTaskFragment)
             }
 
 
