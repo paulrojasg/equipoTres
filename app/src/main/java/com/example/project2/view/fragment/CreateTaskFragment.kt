@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.example.project2.R
 import com.example.project2.viewmodel.TodoTaskViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -83,6 +84,13 @@ class CreateTaskFragment : Fragment() {
     }
 
     private fun prepareListeners() {
+
+
+        val toolbar : Toolbar = binding.contentToolbar.toolbarEdit
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // Save button
         binding.btnSave.setOnClickListener {
             val name = binding.etvName.editableText.toString()
