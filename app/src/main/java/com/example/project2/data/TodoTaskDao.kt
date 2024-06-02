@@ -18,7 +18,7 @@ class TodoTaskDao() {
     private fun getCurrentUserEmail(): String {
 
         //return firebaseAuth.currentUser?.email.toString()
-        return "paul@mail.com"
+        return "nicol@mail.com"
     }
 
     fun getTodoTasks(): MutableList<TodoTask> {

@@ -142,31 +142,6 @@
             />
         </com.google.android.material.textfield.TextInputLayout>
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/textInputDescription"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Descripción"-->
-<!--            app:hintTextColor="@color/white"-->
-<!--            android:textColorHint="@color/white"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/guideline3"-->
-<!--            app:layout_constraintStart_toStartOf="@id/guideline2"-->
-<!--            app:layout_constraintTop_toTopOf="@id/guideline4">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/editTextDescription"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="150dp"-->
-<!--                android:background="@drawable/rounded_edittext"-->
-<!--                android:inputType="text"-->
-<!--                android:maxLength="100"-->
-<!--                android:singleLine="true"-->
-<!--                android:textStyle="italic"-->
-<!--                android:textSize="18sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:fontFamily="@font/abeezee"/>-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
         <Spinner
             android:id="@+id/spinner_categoria"
             android:layout_width="0dp"
