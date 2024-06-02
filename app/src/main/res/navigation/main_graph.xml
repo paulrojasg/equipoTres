@@ -15,4 +15,10 @@
         android:name="com.example.project2.view.fragment.CreateTaskFragment"
         android:label="fragment_create_task"
         tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/viewTaskFragment"
+        android:name="com.example.project2.view.fragment.ViewTaskFragment"
+        android:label="fragment_view_task"
+        tools:layout="@layout/fragment_viewtask" />
+
 </navigation>

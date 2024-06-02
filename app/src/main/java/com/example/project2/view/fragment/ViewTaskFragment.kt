@@ -16,4 +16,17 @@ class ViewTaskFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_viewtask, container, false)
     }
+
+    private fun controladores() {
+        bingin
+        binding.button1.setOnClickListener {
+            try {
+                Log.e("Exito","It works")
+                findNavController().navigate(R.id.action_homeFragment_to_createFragment)
+            } catch(e: Exception) {
+                Log.e("Error","Navegación fallida",e)
+            }
+        }
+
+    }
 }
