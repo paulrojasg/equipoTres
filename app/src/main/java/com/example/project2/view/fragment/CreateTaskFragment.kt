@@ -84,8 +84,8 @@ class CreateTaskFragment : Fragment() {
     private fun prepareListeners() {
         // Save button
         binding.btnSave.setOnClickListener {
-            val name = binding.etvName.text.toString()
-            val description = binding.etvDescription.text.toString()
+            val name = binding.etvName.editableText.toString()
+            val description = binding.etvDescription.editableText.toString()
             val category = categoryOption
             val priority = priorityOption
 
