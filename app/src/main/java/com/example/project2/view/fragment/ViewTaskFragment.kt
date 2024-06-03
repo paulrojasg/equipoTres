@@ -1,7 +1,6 @@
 package com.example.project2.view.fragment
 
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,9 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project2.R
 import com.example.project2.databinding.FragmentViewtaskBinding
-import com.google.firebase.firestore.FirebaseFirestore
 import com.example.project2.view.adapter.TaskAdapter
 import com.example.project2.viewmodel.TodoTaskViewModel
+
 class ViewTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentViewtaskBinding
@@ -28,7 +27,6 @@ class ViewTaskFragment : Fragment() {
     ): View? {
         binding = FragmentViewtaskBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        Log.d("Lista de tareas:", app.getTodoTasks().toString())
         return binding.root
     }
 
@@ -62,8 +60,8 @@ class ViewTaskFragment : Fragment() {
     }
 
     private fun observerListTask(){
-        app.listTodoTask
         app.listTodoTask.observe(viewLifecycleOwner){ listTodoTask ->
+            Log.d("Lista de tareas observadas:", listTodoTask.toString())
             val recycler = binding.recyclerview
             val layoutManager = LinearLayoutManager(context)
             recycler.layoutManager = layoutManager
@@ -72,10 +70,10 @@ class ViewTaskFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
     }
+
     private fun observerProgress(){
         app.progressState.observe(viewLifecycleOwner){status ->
             binding.progress.isVisible = status
         }
     }
-
 }

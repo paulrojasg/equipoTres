@@ -20,15 +20,22 @@ class TodoTaskViewModel (application: Application) : AndroidViewModel(applicatio
     private val _progressState = MutableLiveData(false)
     val progressState: LiveData<Boolean> = _progressState
 
-    fun getTodoTasks() {
+    init {
+        fetchTasks()
+    }
+
+    private fun fetchTasks() {
         viewModelScope.launch {
-            try {
-                _listTodoTask.value = todoTaskRepository.getTodoTasks()
-            } catch (e: Exception) {
-                Log.d("error: ", e.toString())
-            }
+            _progressState.value = true
+            _listTodoTask.value = todoTaskRepository.getTodoTasks()
+            _progressState.value = false
         }
     }
+
+    fun getTodoTasks(): MutableList<TodoTask>? {
+        return _listTodoTask.value
+    }
+
     fun insertTodoTasks(task: TodoTask) {
         viewModelScope.launch {
             try {
