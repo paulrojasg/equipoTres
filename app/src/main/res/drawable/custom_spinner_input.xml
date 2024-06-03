@@ -1,0 +1,11 @@
+<!-- shape_with_icon_right.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Tu forma -->
+    <item android:drawable="@drawable/rounded_edittext" />
+
+    <!-- Icono a la derecha -->
+    <item
+        android:drawable="@drawable/baseline_arrow_drop_down_24"
+        android:gravity="left|center_vertical"
+        android:left="-5dp" /> <!-- Ajusta la distancia desde el borde derecho según sea necesario -->
+</layer-list>

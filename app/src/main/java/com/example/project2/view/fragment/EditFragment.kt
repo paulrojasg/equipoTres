@@ -16,8 +16,11 @@ import com.example.project2.databinding.FragmentEditBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.viewmodel.TodoTaskViewModel
 import android.app.AlertDialog
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.TextView
+import android.graphics.Color
 
 /**
  * A simple [Fragment] subclass.
@@ -108,11 +111,11 @@ class EditFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
+        val categoryAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategoria.adapter = categoryAdapter
 
-        val priorityAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorityOptions)
+        val priorityAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorityOptions)
         priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerPrioridad.adapter = priorityAdapter
 
@@ -138,6 +141,26 @@ class EditFragment : Fragment() {
                 TODO("Not yet implemented")
             }
 
+        }
+    }
+
+    class CustomArrayAdapter(context: Context, resource: Int, objects: List<String>) :
+        ArrayAdapter<String>(context, resource, objects) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getView(position, convertView, parent)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.setTextColor(Color.WHITE)
+            return view
+        }
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getDropDownView(position, convertView, parent)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.setTextColor(Color.WHITE)
+            textView.setBackgroundResource(R.color.rose_strong)
+            textView.text = getItem(position)
+            return view
         }
     }
 
