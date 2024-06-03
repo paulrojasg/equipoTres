@@ -30,18 +30,21 @@ class ViewTaskFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // Funciones necesarias
-        controladores()
-        observadorViewModel()
-        val callback = object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                activity?.moveTaskToBack(true)
-            }
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    // Llama a getTodoTasks para cargar las tareas
+    app.getTodoTasks()
+    controladores()
+    observadorViewModel()
+    val callback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            app.getTodoTasks()
+            activity?.moveTaskToBack(true)
         }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+}
+
 
     private fun controladores() {
         binding.buttonAdd.setOnClickListener {
@@ -59,17 +62,19 @@ class ViewTaskFragment : Fragment() {
         observerProgress()
     }
 
-    private fun observerListTask(){
-        app.listTodoTask.observe(viewLifecycleOwner){ listTodoTask ->
-            Log.d("Lista de tareas observadas:", listTodoTask.toString())
-            val recycler = binding.recyclerview
-            val layoutManager = LinearLayoutManager(context)
-            recycler.layoutManager = layoutManager
-            val adapter = TaskAdapter(listTodoTask, findNavController())
-            recycler.adapter = adapter
-            adapter.notifyDataSetChanged()
-        }
+private fun observerListTask(){
+    app.listTodoTask.observe(viewLifecycleOwner) { listTodoTask ->
+        Log.d("Lista de tareas observadas:", listTodoTask.toString())
+        val recycler = binding.recyclerview
+        val layoutManager = LinearLayoutManager(context)
+        recycler.layoutManager = layoutManager
+        val adapter = TaskAdapter(listTodoTask, findNavController())
+        recycler.adapter = adapter
+        adapter.notifyDataSetChanged()
+        Log.d("RecyclerView", "Adapter Set with ${listTodoTask.size} tasks")
     }
+}
+
 
     private fun observerProgress(){
         app.progressState.observe(viewLifecycleOwner){status ->

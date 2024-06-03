@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.project2.R
 import com.example.project2.databinding.FragmentEditBinding
 import com.example.project2.databinding.FragmentViewtaskBinding
+import com.example.project2.model.TodoTask
+import com.example.project2.viewmodel.TodoTaskViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -18,12 +21,15 @@ import com.example.project2.databinding.FragmentViewtaskBinding
  */
 class EditFragment : Fragment() {
     private lateinit var binding: FragmentEditBinding
+    private val app: TodoTaskViewModel by viewModels()
+    private lateinit var receivedTask: TodoTask
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEditBinding.inflate(inflater)
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -32,6 +38,7 @@ class EditFragment : Fragment() {
 
         // Funciones necesarias
         setToolbar()
+        loadTask()
     }
 
     private fun setToolbar (){
@@ -42,5 +49,13 @@ class EditFragment : Fragment() {
         }
     }
 
+    private fun loadTask() {
+        val receivedBundle = arguments
+        receivedTask = receivedBundle?.getSerializable("dataTask") as TodoTask
+        binding.editTextName.setText(receivedTask.name)
+        binding.editTextDescription.setText(receivedTask.description)
+//        binding.spinner_categoria.setText(receivedTask.category)
+//        binding.spinner_categoria.setText(receivedTask.priority)
+    }
 
 }
