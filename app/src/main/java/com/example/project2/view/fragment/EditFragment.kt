@@ -56,6 +56,7 @@ class EditFragment : Fragment() {
         controladores()
     }
 
+    // ===========================   controladores implemention   ===========================
     private fun controladores() {
         binding.deleteButton.setOnClickListener {
             try {
@@ -73,6 +74,7 @@ class EditFragment : Fragment() {
         }
     }
 
+    // ===========================   backward implementation   ===========================
     private fun setToolbar (){
         val toolbar : Toolbar = binding.contentToolbar.toolbarEdit
         toolbar.setNavigationOnClickListener {
@@ -80,7 +82,7 @@ class EditFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
+    // ===========================   Load information in the fields   ===========================
     private fun loadTask() {
         val receivedBundle = arguments
 
@@ -110,6 +112,7 @@ class EditFragment : Fragment() {
         }
     }
 
+    // ===========================   Spinner personalization   ===========================
     private fun setupSpinners() {
         val categoryAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -164,7 +167,7 @@ class EditFragment : Fragment() {
         }
     }
 
-
+    // ===========================   Button edit validation and implemention   ===========================
     private fun validateData() {
         val listEditText = listOf(binding.editTextName, binding.editTextDescription)
         val spinners = listOf(binding.spinnerCategoria, binding.spinnerPrioridad)
@@ -238,6 +241,7 @@ class EditFragment : Fragment() {
         findNavController().navigate(R.id.action_editTaskFragment_to_viewTaskFragment)
     }
 
+    // ===========================   Button delete validation and implemention   ===========================
     private fun showDeleteConfirmationDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle("Confirmar eliminación")
