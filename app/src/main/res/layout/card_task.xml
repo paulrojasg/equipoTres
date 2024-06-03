@@ -62,6 +62,16 @@
                         android:text="Nombre de la tarea"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/task_priority"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/abeezee"
+                        android:text="Prioridad de la tarea"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -68,6 +68,12 @@ dependencies {
     // LiveData
     val liveDataVersion = "2.3.1"
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$liveDataVersion")
+    implementation ("androidx.lifecycle:lifecycle-common-java8:$liveDataVersion")
+
+    // Kotlin Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.12.0")
