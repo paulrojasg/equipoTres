@@ -23,6 +23,7 @@ import android.widget.TextView
 import android.graphics.Color
 import android.widget.Toast
 import com.example.project2.retrofit.Category
+import com.example.project2.retrofit.Flower
 import com.example.project2.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -253,19 +254,46 @@ class EditFragment : Fragment() {
         val updatedCategory = binding.spinnerCategoria.selectedItem.toString()
         val updatedPriority = binding.spinnerPrioridad.selectedItem.toString()
 
-        // Actualiza las propiedades del objeto TodoTask recibido
+        // Comprueba si la categoría ha cambiado
+        if (updatedCategory != receivedTask.category) {
+            // Si la categoría ha cambiado, haz la petición para obtener la imagen
+            val retrofitBring = RetrofitClient.flowersConsumeApi.getBring()
+            retrofitBring.enqueue(object : Callback<Flower> {
+                override fun onResponse(call: Call<Flower>, response: Response<Flower>) {
+                    var imagePath = response.body()?.file ?: ""
+
+                    val startingIndex = imagePath.indexOf("/cache/")
+                    imagePath = if (startingIndex != -1) {
+                        imagePath.substring(startingIndex)
+                    } else {
+                        ""
+                    }
+                    updateTaskSecondary(updatedName, updatedDescription, updatedCategory, updatedPriority, imagePath)
+                }
+
+                override fun onFailure(call: Call<Flower>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            updateTaskSecondary(updatedName, updatedDescription, updatedCategory, updatedPriority, receivedTask.imagePath)
+        }
+    }
+
+    private fun updateTaskSecondary(name:String, description:String, category:String, prioraty:String, path:String){
+        // Actualiza las propiedades del objeto TodoTask recibido con la nueva imagen
         val updatedTask = receivedTask.copy(
-            name = updatedName,
-            description = updatedDescription,
-            category = updatedCategory,
-            priority = updatedPriority,
-            imagePath = receivedTask.imagePath
+            name = name,
+            description = description,
+            category = category,
+            priority = prioraty,
+            imagePath = path
         )
 
         // Llama al método del ViewModel para actualizar la tarea
         app.updateTodoTasks(updatedTask)
         app.getTodoTasks()
-
+        Toast.makeText(context, "Tarea editada exitosamente", Toast.LENGTH_SHORT).show()
         // Navega de vuelta al fragmento de vista de tareas
         findNavController().navigate(R.id.action_editTaskFragment_to_viewTaskFragment)
     }
@@ -288,9 +316,8 @@ class EditFragment : Fragment() {
     private fun deleteTask(){
         app.deleteTodoTasks(receivedTask)
         app.getTodoTasks()
+        Toast.makeText(context, "Tarea eliminada exitosamente", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_editTaskFragment_to_viewTaskFragment)
     }
-
-    // ===========================   Get Categories  ===========================
 
 }
