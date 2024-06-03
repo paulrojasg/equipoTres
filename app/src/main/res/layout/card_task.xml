@@ -94,15 +94,7 @@
                         android:layout_height="40dp"
                         android:contentDescription="Editar elemento"
                         app:tint="@color/black"
-                        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-                    <ImageButton
-                        android:id="@+id/deleteButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:contentDescription="Eliminar elemento"
-                        app:tint="@color/black"
-                        app:srcCompat="@android:drawable/ic_menu_delete" />
+                        app:srcCompat="@android:drawable/ic_menu_manage" />
 
                 </LinearLayout>
 
