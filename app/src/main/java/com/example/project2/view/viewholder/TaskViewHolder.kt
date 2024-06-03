@@ -14,11 +14,10 @@ class TaskViewHolder(binding: CardTaskBinding, navController: NavController) :
     fun setCardTask(task: TodoTask) {
         bindingTask.taskName.text = task.name
 
-        bindingTask.itemCardView.setOnClickListener {
+        bindingTask.editButton.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("clave", task)
             navController.navigate(R.id.action_fragment_viewtask_to_editTaskFragment, bundle)
         }
-
     }
 }
