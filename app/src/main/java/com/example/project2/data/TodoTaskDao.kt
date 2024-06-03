@@ -10,8 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 val TAG = "mycustomtag"
 
-
-
 class TodoTaskDao() {
     private val firestore = FirebaseFirestore.getInstance()
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -58,36 +56,6 @@ class TodoTaskDao() {
                 Log.e("TodoTaskViewModel", "Error getting tasks", exception)
             }
     }
-
-//    fun getTodoTasks(): MutableList<TodoTask> {
-//        val taskList = mutableListOf<TodoTask>()
-//        val currentUserEmail = getCurrentUserEmail()
-//
-//        firestore.collection("Users").document(currentUserEmail).collection("Tasks")
-//            .get()
-//            .addOnSuccessListener { querySnapshot ->
-//                if (!querySnapshot.isEmpty) {
-//                    for (doc in querySnapshot.documents) {
-//                        val task = TodoTask(
-//                            doc.id,
-//                            doc.getString("name") ?: "task",
-//                            doc.getString("description") ?: "",
-//                            doc.getString("category") ?: "general",
-//                            doc.getString("priority") ?: "1",
-//                        )
-//                        taskList.add(task)
-//                    }
-//                } else {
-//                    Log.d(TAG, "No tasks found")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//
-//                Log.d(TAG, "Error getting tasks", exception)
-//
-//            }
-//        return taskList
-//    }
 
     fun insertTodoTask(task: TodoTask){
 
@@ -142,12 +110,7 @@ class TodoTaskDao() {
             "category" to category,
             "priority" to priority
         ))
-
-
-
     }
-
-
 }
 
 
