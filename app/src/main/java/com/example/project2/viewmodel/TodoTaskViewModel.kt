@@ -1,12 +1,13 @@
 package com.example.project2.viewmodel
 
+import com.example.project2.utils.TaskListener
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.project2.data.TodoTaskDao
+
 import com.example.project2.model.TodoTask
 import com.example.project2.repository.TodoTaskRepository
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class TodoTaskViewModel (application: Application) : AndroidViewModel(applicatio
 
     fun getTodoTasks() {
         viewModelScope.launch {
-            todoTaskRepository.getTodoTasks(object : TodoTaskDao.TasksListener {
+            todoTaskRepository.getTodoTasks(object : TaskListener {
                 override fun onTasksLoaded(tasks: MutableList<TodoTask>) {
                     _listTodoTask.value = tasks
                 }
