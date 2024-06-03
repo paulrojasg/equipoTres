@@ -41,7 +41,6 @@ class EditFragment : Fragment() {
 
     private  var categoryOption = "Categoría"
     private  var priorityOption = "Prioridad"
-    //private val categoriesOptions = listOf("Categoría", "General", "Familia", "Compras", "Estudio", "Trabajo", "Mascotas")
     var categoriesOptions = listOf<String>("")
     private val priorityOptions = listOf("Prioridad", "Baja", "Media", "Alta")
     private var imagePath = ""
@@ -61,8 +60,6 @@ class EditFragment : Fragment() {
         // Funciones necesarias
         setupCategories()
         setToolbar()
-        //setupSpinners()
-//        loadTask()
         controladores()
     }
 
@@ -203,7 +200,7 @@ class EditFragment : Fragment() {
     // ===========================   Button edit validation and implemention   ===========================
     private fun validateData() {
         val listEditText = listOf(binding.editTextName, binding.editTextDescription)
-        val spinners = listOf(binding.spinnerCategoria, binding.spinnerPrioridad)
+//        val spinners = listOf(binding.spinnerCategoria, binding.spinnerPrioridad)
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -223,7 +220,6 @@ class EditFragment : Fragment() {
         }
 
         val isNameFilled = binding.editTextName.text?.isNotEmpty() ?: false
-        val isDescriptionFilled = binding.editTextDescription.text?.isNotEmpty() ?: false
         val isCategoryValid = binding.spinnerCategoria.selectedItem != "Categoría"
         val isPriorityValid = binding.spinnerPrioridad.selectedItem != "Prioridad"
 
