@@ -30,7 +30,7 @@
         app:navigationIcon="@drawable/baseline_arrow_back_ios_24">
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/abeezee"
@@ -38,7 +38,7 @@
             android:text="@string/edit_task_title"
             android:textStyle="italic"
             android:textColor="@color/white"
-            android:textSize="45dp" />
+            android:textSize="35dp" />
 
     </androidx.appcompat.widget.Toolbar>
 

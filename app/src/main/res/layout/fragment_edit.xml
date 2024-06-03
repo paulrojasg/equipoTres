@@ -86,6 +86,20 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.8"/>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.48"/>
+
         <include
             android:id="@+id/contentToolbar"
             layout="@layout/edit_toolbar" />
@@ -109,7 +123,6 @@
                 android:inputType="text"
                 android:maxLength="15"
                 android:singleLine="true"
-                android:textStyle="italic"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/abeezee"/>
@@ -134,7 +147,6 @@
                 android:background="@drawable/rounded_edittext"
                 android:inputType="textMultiLine"
                 android:maxLength="130"
-                android:textStyle="italic"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/abeezee"
@@ -149,6 +161,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_edittext"
             android:textColor="@android:color/white"
+            android:text="Categoría"
             android:textSize="18sp"
             android:fontFamily="@font/abeezee"
             app:layout_constraintEnd_toEndOf="@+id/guideline5"
@@ -162,6 +175,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_edittext"
             android:drawableStart="@drawable/baseline_arrow_drop_down_24"
+            android:text="Prioridad"
             android:textSize="18sp"
             android:fontFamily="@font/abeezee"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
@@ -181,15 +195,18 @@
             app:layout_constraintStart_toStartOf="@+id/guideline9"
             app:layout_constraintTop_toTopOf="@id/guideline8" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_boton"
+            android:backgroundTint="@color/purple"
+            android:padding="19dp"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconSize="35dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline12"
+            app:layout_constraintTop_toTopOf="@id/guideline11" />
 
         <FrameLayout
             android:id="@+id/frameLayoutbuttom"
@@ -204,6 +221,16 @@
             app:layout_constraintStart_toStartOf="@id/guideline5">
 
         </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
