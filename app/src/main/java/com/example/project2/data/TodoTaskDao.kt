@@ -8,10 +8,6 @@ import com.example.project2.view.adapter.TaskAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
 
-val TAG = "mycustomtag"
-
-
-
 class TodoTaskDao() {
     private val firestore = FirebaseFirestore.getInstance()
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -43,6 +39,7 @@ class TodoTaskDao() {
                             doc.getString("description") ?: "",
                             doc.getString("category") ?: "general",
                             doc.getString("priority") ?: "Baja",
+                            doc.getString("imagePath") ?: ""
                         )
                         tasks.add(task)
                     }
@@ -65,6 +62,7 @@ class TodoTaskDao() {
         val description = task.description
         val category = task.category
         val priority = task.priority
+        val imagePath = task.imagePath
 
 
         firestore.collection("Users").document(getCurrentUserEmail()).
@@ -73,7 +71,8 @@ class TodoTaskDao() {
                 "name" to name,
                 "description" to description,
                 "category" to category,
-                "priority" to priority
+                "priority" to priority,
+                "imagePath" to imagePath
             )
         ).addOnSuccessListener{
             Log.d("TaskApp", "Task inserted successfully")
@@ -102,6 +101,7 @@ class TodoTaskDao() {
         val description = task.description
         val category = task.category
         val priority = task.priority
+        val imagePath = task.imagePath
 
         val docRef = firestore.collection("Users").document(getCurrentUserEmail()).
         collection("Tasks").document(taskId)
@@ -110,7 +110,8 @@ class TodoTaskDao() {
             "name" to name,
             "description" to description,
             "category" to category,
-            "priority" to priority
+            "priority" to priority,
+            "imagePath" to imagePath
         ))
 
 
