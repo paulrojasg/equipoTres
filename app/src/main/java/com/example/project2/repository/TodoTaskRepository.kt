@@ -12,12 +12,6 @@ class TodoTaskRepository () {
         todoTaskDao.getTodoTasks(listener)
     }
 
-//    suspend fun getTodoTasks(): MutableList<TodoTask> {
-//        return withContext(Dispatchers.IO) {
-//            todoTaskDao.getTodoTasks()
-//        }
-//    }
-
     suspend fun insertTodoTasks(task: TodoTask) {
         withContext(Dispatchers.IO) {
             todoTaskDao.insertTodoTask(task)
