@@ -8,21 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.project2.R
 import com.example.project2.viewmodel.TodoTaskViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import com.example.project2.databinding.FragmentCreateTaskBinding
 import com.example.project2.model.TodoTask
-import com.example.project2.repository.TodoTaskRepository
-import kotlin.reflect.typeOf
+import com.example.project2.retrofit.Flower
+import com.example.project2.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class CreateTaskFragment : Fragment() {
@@ -83,6 +81,7 @@ class CreateTaskFragment : Fragment() {
         }
     }
 
+
     private fun prepareListeners() {
 
 
@@ -102,19 +101,41 @@ class CreateTaskFragment : Fragment() {
             if (name.isEmpty()) {
                 Toast.makeText(context, "Nombre inválido", Toast.LENGTH_SHORT).show()
             } else {
-                val task = TodoTask(
-                    id="temporal_id",
-                    name=name,
-                    description = description,
-                    category = category,
-                    priority = priority
-                )
+                val retrofitBring = RetrofitClient.consumeApi.getBring()
+                retrofitBring.enqueue(object : Callback<Flower> {
+                    override fun onResponse(call: Call<Flower>, response: Response<Flower>) {
+                        var imagePath = response.body()?.file ?: ""
 
-                app.insertTodoTasks(task)
-                app.getTodoTasks()
-                Log.d("TaskApp", "Task created")
-                Toast.makeText(context, "Tarea creada exitosamente", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_createTaskFragment_to_viewTaskFragment)
+                        val startingIndex = imagePath.indexOf("/cache/")
+                        imagePath = if (startingIndex != -1) {
+                            imagePath.substring(startingIndex)
+                        } else {
+                            ""
+                        }
+
+                        val task = TodoTask(
+                            id="temporal_id",
+                            name=name,
+                            description = description,
+                            category = category,
+                            priority = priority,
+                            imagePath = imagePath
+                        )
+
+                        app.insertTodoTasks(task)
+                        app.getTodoTasks()
+                        Log.d("TaskApp", "Task created")
+                        Toast.makeText(context, "Tarea creada exitosamente", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_createTaskFragment_to_viewTaskFragment)
+
+
+                    }
+
+                    override fun onFailure(call: Call<Flower>, t: Throwable) {
+                        Toast.makeText(requireContext(), "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
             }
 
 
