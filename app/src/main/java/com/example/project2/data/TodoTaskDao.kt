@@ -15,12 +15,11 @@ val TAG = "mycustomtag"
 class TodoTaskDao() {
     private val firestore = FirebaseFirestore.getInstance()
     private val firebaseAuth = FirebaseAuth.getInstance()
-    private val TAG = "TodoTaskDao"
 
     private fun getCurrentUserEmail(): String {
 
         //return firebaseAuth.currentUser?.email.toString()
-        return "nicol@mail.com"
+        return "paul@mail.com"
     }
 
     interface TasksListener {
@@ -43,7 +42,7 @@ class TodoTaskDao() {
                             doc.getString("name") ?: "task",
                             doc.getString("description") ?: "",
                             doc.getString("category") ?: "general",
-                            doc.getString("priority") ?: "1",
+                            doc.getString("priority") ?: "Baja",
                         )
                         tasks.add(task)
                     }
@@ -59,35 +58,6 @@ class TodoTaskDao() {
             }
     }
 
-//    fun getTodoTasks(): MutableList<TodoTask> {
-//        val taskList = mutableListOf<TodoTask>()
-//        val currentUserEmail = getCurrentUserEmail()
-//
-//        firestore.collection("Users").document(currentUserEmail).collection("Tasks")
-//            .get()
-//            .addOnSuccessListener { querySnapshot ->
-//                if (!querySnapshot.isEmpty) {
-//                    for (doc in querySnapshot.documents) {
-//                        val task = TodoTask(
-//                            doc.id,
-//                            doc.getString("name") ?: "task",
-//                            doc.getString("description") ?: "",
-//                            doc.getString("category") ?: "general",
-//                            doc.getString("priority") ?: "1",
-//                        )
-//                        taskList.add(task)
-//                    }
-//                } else {
-//                    Log.d(TAG, "No tasks found")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//
-//                Log.d(TAG, "Error getting tasks", exception)
-//
-//            }
-//        return taskList
-//    }
 
     fun insertTodoTask(task: TodoTask){
 

@@ -8,15 +8,12 @@ import kotlinx.coroutines.withContext
 class TodoTaskRepository () {
     private val todoTaskDao = TodoTaskDao()
 
-    fun getTodoTasks(listener: TodoTaskDao.TasksListener) {
-        todoTaskDao.getTodoTasks(listener)
+    suspend fun getTodoTasks(listener: TodoTaskDao.TasksListener) {
+        withContext(Dispatchers.IO) {
+            todoTaskDao.getTodoTasks(listener)
+        }
     }
 
-//    suspend fun getTodoTasks(): MutableList<TodoTask> {
-//        return withContext(Dispatchers.IO) {
-//            todoTaskDao.getTodoTasks()
-//        }
-//    }
 
     suspend fun insertTodoTasks(task: TodoTask) {
         withContext(Dispatchers.IO) {
