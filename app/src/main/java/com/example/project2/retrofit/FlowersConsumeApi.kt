@@ -4,7 +4,7 @@ import com.example.project2.retrofit.Flower
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface ConsumeApi {
+interface FlowersConsumeApi {
     @GET("json/320/240/flower")
     fun getBring(): Call<Flower>
 
