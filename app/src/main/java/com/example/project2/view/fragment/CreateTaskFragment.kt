@@ -34,7 +34,7 @@ class CreateTaskFragment : Fragment() {
     private  var categoryOption = "Categoría"
     private  var priorityOption = "Prioridad"
     private val categoryOptions = listOf("General", "Familia", "Compras", "Estudio", "Trabajo", "Mascotas")
-    private val priorityOptions = listOf("1", "2", "3")
+    private val priorityOptions = listOf("Baja", "Media", "Alta")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,6 +88,7 @@ class CreateTaskFragment : Fragment() {
 
         val toolbar : Toolbar = binding.contentToolbar.toolbarEdit
         toolbar.setNavigationOnClickListener {
+            app.getTodoTasks()
             findNavController().popBackStack()
         }
 

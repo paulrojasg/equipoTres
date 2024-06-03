@@ -13,6 +13,7 @@ class TaskViewHolder(binding: CardTaskBinding, navController: NavController) :
     val navController = navController
     fun setCardTask(task: TodoTask) {
         bindingTask.taskName.text = task.name
+        bindingTask.taskPriority.text = "Prioridad: ${task.priority}"
 
         bindingTask.editButton.setOnClickListener {
             val bundle = Bundle()
