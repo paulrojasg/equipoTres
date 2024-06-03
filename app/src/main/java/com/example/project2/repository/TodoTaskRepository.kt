@@ -50,7 +50,6 @@ class TodoTaskRepository () {
         }
     }
 
-
     suspend fun insertTodoTasks(task: TodoTask) {
         withContext(Dispatchers.IO) {
             val name = task.name
