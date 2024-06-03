@@ -54,7 +54,8 @@
                 android:gravity="center"
                 android:text="@string/view_task"
                 android:textColor="@color/white"
-                android:textSize="42dp" />
+                android:textSize="42dp"
+                android:textStyle="italic" />
         </FrameLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
