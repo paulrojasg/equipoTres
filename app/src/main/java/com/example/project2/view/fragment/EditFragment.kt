@@ -37,6 +37,7 @@ class EditFragment : Fragment() {
     private  var priorityOption = "Prioridad"
     private val categoryOptions = listOf("Categoría", "General", "Familia", "Compras", "Estudio", "Trabajo", "Mascotas")
     private val priorityOptions = listOf("Prioridad", "Baja", "Media", "Alta")
+    private var imagePath = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,6 +97,7 @@ class EditFragment : Fragment() {
         val description = receivedTask.description
         val category = receivedTask.category
         val priority = receivedTask.priority
+        imagePath = receivedTask.imagePath
 
         // Establece los valores de los editText
         binding.editTextName.setText(name)
@@ -227,7 +229,8 @@ class EditFragment : Fragment() {
             name = updatedName,
             description = updatedDescription,
             category = updatedCategory,
-            priority = updatedPriority
+            priority = updatedPriority,
+            imagePath = receivedTask.imagePath
         )
 
         // Llama al método del ViewModel para actualizar la tarea
