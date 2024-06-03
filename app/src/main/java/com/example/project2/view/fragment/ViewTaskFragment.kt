@@ -32,13 +32,10 @@ class ViewTaskFragment : Fragment() {
 
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    // Llama a getTodoTasks para cargar las tareas
-    app.getTodoTasks()
     controladores()
     observadorViewModel()
     val callback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
-            app.getTodoTasks()
             activity?.moveTaskToBack(true)
         }
     }
