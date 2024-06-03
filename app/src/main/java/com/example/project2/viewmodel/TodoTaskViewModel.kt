@@ -25,19 +25,6 @@ class TodoTaskViewModel (application: Application) : AndroidViewModel(applicatio
         getTodoTasks()
     }
 
-//    fun getTodoTasks() {
-//        viewModelScope.launch {
-//            try {
-//                _progressState.value = true
-//                val tasks = todoTaskRepository.getTodoTasks()
-//                _listTodoTask.value = tasks
-//                _progressState.value = false
-//            }  catch (e: Exception) {
-//                Log.d("error: ", e.toString())
-//            }
-//        }
-//    }
-
     fun getTodoTasks() {
         viewModelScope.launch {
             todoTaskRepository.getTodoTasks(object : TodoTaskDao.TasksListener {
