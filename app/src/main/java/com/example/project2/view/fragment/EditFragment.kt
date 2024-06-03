@@ -22,6 +22,11 @@ import android.text.TextWatcher
 import android.widget.TextView
 import android.graphics.Color
 import android.widget.Toast
+import com.example.project2.retrofit.Category
+import com.example.project2.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * A simple [Fragment] subclass.
@@ -35,7 +40,8 @@ class EditFragment : Fragment() {
 
     private  var categoryOption = "Categoría"
     private  var priorityOption = "Prioridad"
-    private val categoryOptions = listOf("Categoría", "General", "Familia", "Compras", "Estudio", "Trabajo", "Mascotas")
+    //private val categoriesOptions = listOf("Categoría", "General", "Familia", "Compras", "Estudio", "Trabajo", "Mascotas")
+    var categoriesOptions = listOf<String>("")
     private val priorityOptions = listOf("Prioridad", "Baja", "Media", "Alta")
     private var imagePath = ""
 
@@ -52,9 +58,10 @@ class EditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Funciones necesarias
+        setupCategories()
         setToolbar()
-        setupSpinners()
-        loadTask()
+        //setupSpinners()
+//        loadTask()
         controladores()
     }
 
@@ -74,6 +81,27 @@ class EditFragment : Fragment() {
                 Log.e("Error","Navegación fallida",e)
             }
         }
+    }
+
+    private fun setupCategories() {
+        val retrofitBring = RetrofitClient.mockableConsumeApi.getBring()
+        retrofitBring.enqueue(object : Callback<List<Category>> {
+            override fun onResponse(
+                call: Call<List<Category>>,
+                response: Response<List<Category>>
+            ) {
+                val categoriesListFor = mutableListOf<String>()
+                for (c in response.body() ?: listOf(Category(id=0, name=""))) {
+                    categoriesListFor.add(c.name)
+                }
+                categoriesOptions = categoriesListFor
+                setupSpinners()
+            }
+
+            override fun onFailure(call: Call<List<Category>>, t: Throwable) {
+                Toast.makeText(requireContext(), t.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     // ===========================   backward implementation   ===========================
@@ -104,7 +132,7 @@ class EditFragment : Fragment() {
         binding.editTextDescription.setText(description)
 
         // Establece los valores seleccionados en los Spinners
-        val categoryPosition = categoryOptions.indexOf(category)
+        val categoryPosition = categoriesOptions.indexOf(category)
         if (categoryPosition >= 0) {
             binding.spinnerCategoria.setSelection(categoryPosition)
         }
@@ -117,7 +145,7 @@ class EditFragment : Fragment() {
 
     // ===========================   Spinner personalization   ===========================
     private fun setupSpinners() {
-        val categoryAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
+        val categoryAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoriesOptions)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategoria.adapter = categoryAdapter
 
@@ -127,7 +155,7 @@ class EditFragment : Fragment() {
 
         binding.spinnerCategoria.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val category = categoryOptions[position]
+                val category = categoriesOptions[position]
                 categoryOption = category
             }
 
@@ -148,6 +176,7 @@ class EditFragment : Fragment() {
             }
 
         }
+        loadTask()
     }
 
     class CustomArrayAdapter(context: Context, resource: Int, objects: List<String>) :

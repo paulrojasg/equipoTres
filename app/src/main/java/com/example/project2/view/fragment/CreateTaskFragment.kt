@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.project2.databinding.FragmentCreateTaskBinding
 import com.example.project2.model.TodoTask
+import com.example.project2.retrofit.Category
 import com.example.project2.retrofit.Flower
 import com.example.project2.retrofit.RetrofitClient
 import retrofit2.Call
@@ -31,8 +32,8 @@ class CreateTaskFragment : Fragment() {
     private val app: TodoTaskViewModel by viewModels()
     private  var categoryOption = "Categoría"
     private  var priorityOption = "Prioridad"
-    private val categoryOptions = listOf("General", "Familia", "Compras", "Estudio", "Trabajo", "Mascotas")
-    private val priorityOptions = listOf("Baja", "Media", "Alta")
+    private var categoriesOptions = listOf("")
+    private val priorityOptions = listOf("Prioridad", "Baja", "Media", "Alta")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +42,36 @@ class CreateTaskFragment : Fragment() {
         _binding = FragmentCreateTaskBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        setupSpinners()
+        setupCategories()
+
         prepareListeners()
 
         return view
     }
 
+    private fun setupCategories() {
+        val retrofitBring = RetrofitClient.mockableConsumeApi.getBring()
+        retrofitBring.enqueue(object : Callback<List<Category>>{
+            override fun onResponse(
+                call: Call<List<Category>>,
+                response: Response<List<Category>>
+            ) {
+                val categoriesListFor = mutableListOf<String>()
+                for (c in response.body() ?: listOf(Category(id=0, name=""))) {
+                    categoriesListFor.add(c.name)
+                }
+                categoriesOptions = categoriesListFor
+                setupSpinners()
+            }
+
+            override fun onFailure(call: Call<List<Category>>, t: Throwable) {
+                Toast.makeText(requireContext(), t.toString(), Toast.LENGTH_SHORT).show()
+                Log.d("tres",t.toString())
+            }
+        })
+    }
     private fun setupSpinners() {
-        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
+        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoriesOptions)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spCategory.adapter = categoryAdapter
 
@@ -58,7 +81,7 @@ class CreateTaskFragment : Fragment() {
 
         binding.spCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val category = categoryOptions[position]
+                val category = categoriesOptions[position]
                 categoryOption = category
             }
 
@@ -98,10 +121,15 @@ class CreateTaskFragment : Fragment() {
             val category = categoryOption
             val priority = priorityOption
 
+            val isCategoryValid = binding.spCategory.selectedItem != "Categoría"
+            val isPriorityValid = binding.spPriority.selectedItem != "Prioridad"
+
             if (name.isEmpty()) {
                 Toast.makeText(context, "Nombre inválido", Toast.LENGTH_SHORT).show()
+            } else if (!isCategoryValid || !isPriorityValid) {
+                Toast.makeText(context, "Debe seleccionar una categoría y prioridad válidas", Toast.LENGTH_SHORT).show()
             } else {
-                val retrofitBring = RetrofitClient.consumeApi.getBring()
+                val retrofitBring = RetrofitClient.flowersConsumeApi.getBring()
                 retrofitBring.enqueue(object : Callback<Flower> {
                     override fun onResponse(call: Call<Flower>, response: Response<Flower>) {
                         var imagePath = response.body()?.file ?: ""
