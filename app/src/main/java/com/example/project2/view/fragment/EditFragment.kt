@@ -16,8 +16,12 @@ import com.example.project2.databinding.FragmentEditBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.viewmodel.TodoTaskViewModel
 import android.app.AlertDialog
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.TextView
+import android.graphics.Color
+import android.widget.Toast
 
 /**
  * A simple [Fragment] subclass.
@@ -54,6 +58,7 @@ class EditFragment : Fragment() {
         controladores()
     }
 
+    // ===========================   controladores implemention   ===========================
     private fun controladores() {
         binding.deleteButton.setOnClickListener {
             try {
@@ -71,6 +76,7 @@ class EditFragment : Fragment() {
         }
     }
 
+    // ===========================   backward implementation   ===========================
     private fun setToolbar (){
         val toolbar : Toolbar = binding.contentToolbar.toolbarEdit
         toolbar.setNavigationOnClickListener {
@@ -78,7 +84,7 @@ class EditFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
+    // ===========================   Load information in the fields   ===========================
     private fun loadTask() {
         val receivedBundle = arguments
 
@@ -109,12 +115,13 @@ class EditFragment : Fragment() {
         }
     }
 
+    // ===========================   Spinner personalization   ===========================
     private fun setupSpinners() {
-        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
+        val categoryAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategoria.adapter = categoryAdapter
 
-        val priorityAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorityOptions)
+        val priorityAdapter = CustomArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorityOptions)
         priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerPrioridad.adapter = priorityAdapter
 
@@ -143,7 +150,27 @@ class EditFragment : Fragment() {
         }
     }
 
+    class CustomArrayAdapter(context: Context, resource: Int, objects: List<String>) :
+        ArrayAdapter<String>(context, resource, objects) {
 
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getView(position, convertView, parent)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.setTextColor(Color.WHITE)
+            return view
+        }
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getDropDownView(position, convertView, parent)
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            textView.setTextColor(Color.WHITE)
+            textView.setBackgroundResource(R.color.rose_strong)
+            textView.text = getItem(position)
+            return view
+        }
+    }
+
+    // ===========================   Button edit validation and implemention   ===========================
     private fun validateData() {
         val listEditText = listOf(binding.editTextName, binding.editTextDescription)
         val spinners = listOf(binding.spinnerCategoria, binding.spinnerPrioridad)
@@ -158,10 +185,6 @@ class EditFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val isListFull = listEditText.all { it.text?.isNotEmpty() ?: false }
-                val isSpinnersValid = spinners.all { spinner ->
-                    spinner.selectedItem != "Categoría" && spinner.selectedItem != "Prioridad"
-                }
             }
         }
 
@@ -174,8 +197,8 @@ class EditFragment : Fragment() {
         val isCategoryValid = binding.spinnerCategoria.selectedItem != "Categoría"
         val isPriorityValid = binding.spinnerPrioridad.selectedItem != "Prioridad"
 
-        if (!isNameFilled || !isDescriptionFilled) {
-            showAlert("Error", "El nombre y la descripción deben ser llenados")
+        if (!isNameFilled) {
+            showAlert("Error", "Debe llenar el nombre de la tarea")
         } else if (!isCategoryValid || !isPriorityValid) {
             showAlert("Error", "Debe seleccionar una categoría y prioridad válidas")
         } else {
@@ -218,6 +241,7 @@ class EditFragment : Fragment() {
         findNavController().navigate(R.id.action_editTaskFragment_to_viewTaskFragment)
     }
 
+    // ===========================   Button delete validation and implemention   ===========================
     private fun showDeleteConfirmationDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle("Confirmar eliminación")
@@ -237,5 +261,7 @@ class EditFragment : Fragment() {
         app.getTodoTasks()
         findNavController().navigate(R.id.action_editTaskFragment_to_viewTaskFragment)
     }
+
+    // ===========================   Get Categories  ===========================
 
 }
