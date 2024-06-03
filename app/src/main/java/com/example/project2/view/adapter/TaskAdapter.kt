@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.project2.model.TodoTask
 import com.example.project2.databinding.CardTaskBinding
 import com.example.project2.view.viewholder.TaskViewHolder
-class TaskAdapter(private val listTask:MutableList<TodoTask>, private val navController: NavController):RecyclerView.Adapter<TaskViewHolder>() {
+
+class TaskAdapter(private val listTask: MutableList<TodoTask>, private val navController: NavController) : RecyclerView.Adapter<TaskViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = CardTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TaskViewHolder(binding, navController)
