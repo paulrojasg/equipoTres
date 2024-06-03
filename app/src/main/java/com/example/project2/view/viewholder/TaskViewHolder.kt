@@ -17,10 +17,10 @@ class TaskViewHolder(binding: CardTaskBinding, navController: NavController) :
         bindingTask.taskName.text = task.name
         bindingTask.taskPriority.text = "Prioridad: ${task.priority}"
         // Cargar la imagen desde la URL y aplicar la transformación CircleCrop
-//        Glide.with(bindingTask.root.context)
-//            .load(task.imagePath)
-//            .transform(CircleCrop())
-//            .into(bindingTask.taskImage)
+        Glide.with(bindingTask.root.context)
+            .load("https://loremflickr.com/${task.imagePath}")
+            .transform(CircleCrop())
+            .into(bindingTask.taskImage)
 
         bindingTask.editButton.setOnClickListener {
             val bundle = Bundle()
