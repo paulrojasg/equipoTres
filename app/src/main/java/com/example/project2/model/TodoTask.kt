@@ -7,5 +7,6 @@ data class TodoTask(
     val name: String,
     val description: String,
     val category: String,
-    val priority: String
+    val priority: String,
+    val imagePath: String
 ): Serializable
