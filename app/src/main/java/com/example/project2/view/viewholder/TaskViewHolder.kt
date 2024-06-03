@@ -1,15 +1,11 @@
 package com.example.project2.view.viewholder
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project2.R
 import com.example.project2.databinding.CardTaskBinding
 import com.example.project2.model.TodoTask
-import com.example.project2.repository.TodoTaskRepository
-import com.example.project2.view.fragment.ViewTaskFragment
 
 class TaskViewHolder(binding: CardTaskBinding, navController: NavController) :
     RecyclerView.ViewHolder(binding.root) {

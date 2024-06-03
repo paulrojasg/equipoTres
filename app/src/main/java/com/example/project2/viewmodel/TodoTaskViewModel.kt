@@ -25,19 +25,6 @@ class TodoTaskViewModel (application: Application) : AndroidViewModel(applicatio
         getTodoTasks()
     }
 
-//    fun getTodoTasks() {
-//        viewModelScope.launch {
-//            try {
-//                _progressState.value = true
-//                val tasks = todoTaskRepository.getTodoTasks()
-//                _listTodoTask.value = tasks
-//                _progressState.value = false
-//            }  catch (e: Exception) {
-//                Log.d("error: ", e.toString())
-//            }
-//        }
-//    }
-
     fun getTodoTasks() {
         viewModelScope.launch {
             todoTaskRepository.getTodoTasks(object : TodoTaskDao.TasksListener {
@@ -71,7 +58,6 @@ class TodoTaskViewModel (application: Application) : AndroidViewModel(applicatio
         }
     }
 
-
     fun updateTodoTasks(task: TodoTask) {
         viewModelScope.launch {
             try {
@@ -85,38 +71,5 @@ class TodoTaskViewModel (application: Application) : AndroidViewModel(applicatio
 
 }
 
-//fun getTodoTasks() {
-//    val db = FirebaseFirestore.getInstance()
-//    val currentUserEmail = getCurrentUserEmail()
-//    val tasks = mutableListOf<TodoTask>()
-//
-//    db.collection("Users").document(currentUserEmail).collection("Tasks")
-//        .get()
-//        .addOnSuccessListener { querySnapshot ->
-//            if (!querySnapshot.isEmpty) {
-//                for (doc in querySnapshot.documents) {
-//                    val task = TodoTask(
-//                        doc.id,
-//                        doc.getString("name") ?: "task",
-//                        doc.getString("description") ?: "",
-//                        doc.getString("category") ?: "general",
-//                        doc.getString("priority") ?: "1",
-//                    )
-//                    tasks.add(task)
-//                }
-//                _listTodoTask.value = tasks
-//                Log.d("TodoTaskViewModel", "Tareas obtenidas: ${tasks.toString()}")
-//            } else {
-//                Log.d("TodoTaskViewModel", "No tasks found")
-//            }
-//        }
-//        .addOnFailureListener { exception ->
-//            Log.e("TodoTaskViewModel", "Error getting tasks", exception)
-//        }
-//}
-//
-//private fun getCurrentUserEmail(): String {
-//    // Implementa la lógica para obtener el email del usuario actual
-//    return "nicol@mail.com"
-//}
+
 
