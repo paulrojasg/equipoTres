@@ -21,6 +21,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
 import android.graphics.Color
+import android.widget.Toast
 
 /**
  * A simple [Fragment] subclass.
@@ -182,10 +183,6 @@ class EditFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val isListFull = listEditText.all { it.text?.isNotEmpty() ?: false }
-                val isSpinnersValid = spinners.all { spinner ->
-                    spinner.selectedItem != "Categoría" && spinner.selectedItem != "Prioridad"
-                }
             }
         }
 
@@ -261,5 +258,7 @@ class EditFragment : Fragment() {
         app.getTodoTasks()
         findNavController().navigate(R.id.action_editTaskFragment_to_viewTaskFragment)
     }
+
+    // ===========================   Get Categories  ===========================
 
 }
