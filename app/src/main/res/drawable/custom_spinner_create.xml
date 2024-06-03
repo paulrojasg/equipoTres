@@ -1,8 +1,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/rounded_edittext" />
+    <item android:drawable="@drawable/rounded_create_input" />
     <!-- Icono a la izquierda -->
     <item
-        android:drawable="@drawable/baseline_arrow_drop_down_24"
+        android:drawable="@drawable/baseline_arrow_drop_down_24_create"
         android:gravity="left|center_vertical"
         android:left="-5dp" />
 </layer-list>

@@ -121,11 +121,12 @@
                 android:layout_height="55dp"
                 android:background="@drawable/rounded_edittext"
                 android:inputType="text"
-                android:maxLength="15"
+                android:maxLength="32"
                 android:singleLine="true"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/abeezee"/>
+                android:fontFamily="@font/abeezee"
+                android:textStyle="italic"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,11 +147,12 @@
                 android:layout_height="150dp"
                 android:background="@drawable/rounded_edittext"
                 android:inputType="textMultiLine"
-                android:maxLength="130"
+                android:maxLength="150"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/abeezee"
                 android:gravity="top|start"
+                android:textStyle="italic"
             />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,10 +163,10 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/custom_spinner_input"
             android:textColor="@color/white"
-            android:text="Categoría"
             android:textSize="18sp"
             android:fontFamily="@font/abeezee"
             android:paddingStart="30dp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline7"  />
@@ -176,10 +178,10 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/custom_spinner_input"
             android:textColor="@color/white"
-            android:text="Prioridad"
             android:textSize="18sp"
             android:fontFamily="@font/abeezee"
             android:paddingStart="30dp"
+            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
             app:layout_constraintEnd_toEndOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline7" />
