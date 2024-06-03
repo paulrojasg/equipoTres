@@ -195,8 +195,8 @@ class EditFragment : Fragment() {
         val isCategoryValid = binding.spinnerCategoria.selectedItem != "Categoría"
         val isPriorityValid = binding.spinnerPrioridad.selectedItem != "Prioridad"
 
-        if (!isNameFilled || !isDescriptionFilled) {
-            showAlert("Error", "El nombre y la descripción deben ser llenados")
+        if (!isNameFilled) {
+            showAlert("Error", "Debe llenar el nombre de la tarea")
         } else if (!isCategoryValid || !isPriorityValid) {
             showAlert("Error", "Debe seleccionar una categoría y prioridad válidas")
         } else {
