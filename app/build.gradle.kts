@@ -65,6 +65,10 @@ dependencies {
     val fragment_version = "1.7.0"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
+    //User interface components
+    val materialVersion= "1.4.0"
+    implementation("com.google.android.material:material:$materialVersion")
+
     // LiveData
     val liveDataVersion = "2.3.1"
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion")
