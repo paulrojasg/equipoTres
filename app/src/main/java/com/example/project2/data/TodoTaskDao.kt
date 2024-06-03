@@ -2,7 +2,9 @@ package com.example.project2.data
 
 import android.util.Log
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.example.project2.model.TodoTask
+import com.example.project2.view.adapter.TaskAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
 
@@ -18,14 +20,20 @@ class TodoTaskDao() {
     private fun getCurrentUserEmail(): String {
 
         //return firebaseAuth.currentUser?.email.toString()
-        return "paul@mail.com"
+        return "nicol@mail.com"
     }
 
-    fun getTodoTasks(): MutableList<TodoTask> {
-        val taskList = mutableListOf<TodoTask>()
-        val currentUserEmail = getCurrentUserEmail()
+    interface TasksListener {
+        fun onTasksLoaded(tasks: MutableList<TodoTask>)
+        fun onTasksLoadError(exception: Exception)
+    }
 
-        firestore.collection("Users").document(currentUserEmail).collection("Tasks")
+    fun getTodoTasks(listener: TasksListener) {
+        val db = FirebaseFirestore.getInstance()
+        val currentUserEmail = getCurrentUserEmail()
+        val tasks = mutableListOf<TodoTask>()
+
+        db.collection("Users").document(currentUserEmail).collection("Tasks")
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
@@ -37,20 +45,49 @@ class TodoTaskDao() {
                             doc.getString("category") ?: "general",
                             doc.getString("priority") ?: "1",
                         )
-                        taskList.add(task)
+                        tasks.add(task)
                     }
+                    listener.onTasksLoaded(tasks)
+                    Log.d("TodoTaskViewModel", "Tareas obtenidas: ${tasks.toString()}")
                 } else {
-                    Log.d(TAG, "No tasks found")
+                    Log.d("TodoTaskViewModel", "No tasks found")
                 }
             }
             .addOnFailureListener { exception ->
-
-                Log.d(TAG, "Error getting tasks", exception)
-
+                listener.onTasksLoadError(exception)
+                Log.e("TodoTaskViewModel", "Error getting tasks", exception)
             }
-        return taskList
-
     }
+
+//    fun getTodoTasks(): MutableList<TodoTask> {
+//        val taskList = mutableListOf<TodoTask>()
+//        val currentUserEmail = getCurrentUserEmail()
+//
+//        firestore.collection("Users").document(currentUserEmail).collection("Tasks")
+//            .get()
+//            .addOnSuccessListener { querySnapshot ->
+//                if (!querySnapshot.isEmpty) {
+//                    for (doc in querySnapshot.documents) {
+//                        val task = TodoTask(
+//                            doc.id,
+//                            doc.getString("name") ?: "task",
+//                            doc.getString("description") ?: "",
+//                            doc.getString("category") ?: "general",
+//                            doc.getString("priority") ?: "1",
+//                        )
+//                        taskList.add(task)
+//                    }
+//                } else {
+//                    Log.d(TAG, "No tasks found")
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//
+//                Log.d(TAG, "Error getting tasks", exception)
+//
+//            }
+//        return taskList
+//    }
 
     fun insertTodoTask(task: TodoTask){
 

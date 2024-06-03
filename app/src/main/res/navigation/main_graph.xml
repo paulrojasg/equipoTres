@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/createTaskFragment">
+    app:startDestination="@id/viewTaskFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -11,8 +11,33 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
+        android:id="@+id/viewTaskFragment"
+        android:name="com.example.project2.view.fragment.ViewTaskFragment"
+        android:label="fragment_view"
+        tools:layout="@layout/fragment_viewtask">
+        <action
+            android:id="@+id/action_fragment_viewtask_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+        <action
+            android:id="@+id/action_fragment_viewtask_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
+    </fragment>    
+    <fragment
         android:id="@+id/createTaskFragment"
         android:name="com.example.project2.view.fragment.CreateTaskFragment"
         android:label="fragment_create_task"
-        tools:layout="@layout/fragment_create_task" />
+        tools:layout="@layout/fragment_create_task" >
+        <action
+            android:id="@+id/action_createTaskFragment_to_viewTaskFragment"
+            app:destination="@id/viewTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.example.project2.view.fragment.EditFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit" >
+    <action
+        android:id="@+id/action_editTaskFragment_to_viewTaskFragment"
+        app:destination="@id/viewTaskFragment" />
+    </fragment>
 </navigation>
