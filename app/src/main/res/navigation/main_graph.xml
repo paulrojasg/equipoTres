@@ -35,5 +35,9 @@
         android:id="@+id/editTaskFragment"
         android:name="com.example.project2.view.fragment.EditFragment"
         android:label="fragment_edit_task"
-        tools:layout="@layout/fragment_edit" />
+        tools:layout="@layout/fragment_edit" >
+    <action
+        android:id="@+id/action_editTaskFragment_to_viewTaskFragment"
+        app:destination="@id/viewTaskFragment" />
+    </fragment>
 </navigation>
