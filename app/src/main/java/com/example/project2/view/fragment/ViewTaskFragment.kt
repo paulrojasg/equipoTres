@@ -56,6 +56,14 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                 Log.e("Error","Navegación fallida",e)
             }
         }
+        binding.imageButton4.setOnClickListener {
+            try{
+                Log.e("Exito","It works")
+                findNavController().navigate(R.id.action_fragment_viewtask_to_loginFragment)
+            }catch(e: Exception){
+                Log.e("Error","Navegación fallida",e)
+            }
+        }
     }
 
     private fun observadorViewModel(){
