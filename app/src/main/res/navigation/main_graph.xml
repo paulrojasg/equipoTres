@@ -9,7 +9,26 @@
         android:id="@+id/loginFragment"
         android:name="com.example.project2.view.fragment.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragment_viewlogin_to_taskFragment"
+            app:destination="@id/viewTaskFragment" />
+        <action
+            android:id="@+id/action_fragment_viewlogin_to_singinFragment"
+            app:destination="@id/singinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singinFragment"
+        android:name="com.example.project2.view.fragment.LoginFragment"
+        android:label="fragment_singin"
+        tools:layout="@layout/fragment_singin" >
+        <action
+            android:id="@+id/action_fragment_viewlogin_to_taskFragment"
+            app:destination="@id/viewTaskFragment" />
+        <action
+            android:id="@+id/action_fragment_viewsingin_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewTaskFragment"
         android:name="com.example.project2.view.fragment.ViewTaskFragment"
