@@ -48,18 +48,19 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/task_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
                         android:fontFamily="@font/abeezee"
                         android:text="Nombre de la tarea"
+                        android:layout_gravity="left"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -70,6 +71,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/abeezee"
                         android:text="Prioridad de la tarea"
+                        android:layout_gravity="left"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
