@@ -7,21 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.project2.R
-import com.example.project2.databinding.FragmentLoginBinding
+import com.example.project2.databinding.FragmentSinginBinding
 import com.example.project2.viewmodel.TodoTaskViewModel
 
-class LoginFragment : Fragment() {
+class SinginFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentSinginBinding
+    private val app: TodoTaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater)
+        binding = FragmentSinginBinding.inflate(inflater)
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -37,21 +40,18 @@ class LoginFragment : Fragment() {
     }
 
     private fun controladores() {
-        binding.loginButton.setOnClickListener {
+        binding.singinButton.setOnClickListener {
             try {
                 Log.d("Exito","It works")
-                findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
+                findNavController().navigate(R.id.action_singinFragment_to_loginFragment)
             } catch(e: Exception) {
                 Log.e("Error","Navegación fallida de task",e)
             }
         }
-        binding.singinButton.setOnClickListener {
-            try {
-                Log.d("Exito","It works")
-                findNavController().navigate(R.id.action_loginFragment_to_singinFragment)
-            } catch(e: Exception) {
-                Log.e("Error","Navegación fallida de task",e)
-            }
+        val toolbar : Toolbar = binding.contentToolbar.toolbarSingin
+        toolbar.setNavigationOnClickListener {
+            app.getTodoTasks()
+            findNavController().popBackStack()
         }
     }
 
