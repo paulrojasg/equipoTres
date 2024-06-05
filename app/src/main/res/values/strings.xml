@@ -11,4 +11,8 @@
     <string name="crear_tarea">Crear Tarea</string>
     <string name="nombre_de_la_tarea">Nombre de la tarea</string>
     <string name="descripci_n">Descripción</string>
+    <string name="detalle_tarea">Detalle tarea</string>
+    <string name="categoria">Categoria</string>
+    <string name="prioridad">Prioridad</string>
+
 </resources>
