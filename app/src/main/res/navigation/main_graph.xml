@@ -3,13 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/viewTaskFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.project2.view.fragment.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_viewTaskFragment"
+            app:destination="@id/viewTaskFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_singinFragment"
+            app:destination="@id/singinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singinFragment"
+        android:name="com.example.project2.view.fragment.SinginFragment"
+        android:label="fragment_singin"
+        tools:layout="@layout/fragment_singin" >
+        <action
+            android:id="@+id/action_singinFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_singinFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewTaskFragment"
         android:name="com.example.project2.view.fragment.ViewTaskFragment"
