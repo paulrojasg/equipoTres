@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Bloom-do</string>
     <string name="edit_task_title">Editar o Eliminar Tarea</string>
-    <string name="login_title">Bienvenido a To-Do List</string>
+    <string name="login_title">Bienvenido a Bloom-do</string>
+    <string name="prefs_file">com.example.project2.PREFERENCE_FILE_KEY</string>
     <string name="singin_title">Crear Cuenta</string>
     <string name="crear_cuenta">Crear cuenta</string>
     <string name="ingresar">Ingresar</string>
