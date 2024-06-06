@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.project2.model.TodoTask
 import com.example.project2.utils.TaskListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -11,8 +12,8 @@ class TodoTaskRepository () {
     private val firestore = FirebaseFirestore.getInstance()
     private fun getCurrentUserEmail(): String {
 
-        //return firebaseAuth.currentUser?.email.toString()
-        return "paul@mail.com"
+        return FirebaseAuth.getInstance().currentUser?.email.toString()
+        //return "paul@mail.com"
     }
 
 
