@@ -1,5 +1,6 @@
 package com.example.project2.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.example.project2.databinding.FragmentViewtaskBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.view.adapter.TaskAdapter
 import com.example.project2.viewmodel.TodoTaskViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class ViewTaskFragment : Fragment() {
 
@@ -58,7 +60,11 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         }
         binding.imageButton4.setOnClickListener {
             try{
-                Log.e("Exito","It works")
+                //Borrar la session
+                val sharedPreferences = requireContext().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                sharedPreferences.clear()
+                sharedPreferences.apply()
+                FirebaseAuth.getInstance().signOut()
                 findNavController().navigate(R.id.action_fragment_viewtask_to_loginFragment)
             }catch(e: Exception){
                 Log.e("Error","Navegación fallida",e)
