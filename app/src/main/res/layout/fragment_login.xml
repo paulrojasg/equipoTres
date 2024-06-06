@@ -85,23 +85,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Correo electrónico"
-        app:hintTextColor="@color/white"
         android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="@id/guideline3">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@drawable/rounded_edittext"
+            android:fontFamily="@font/abeezee"
             android:inputType="text"
             android:maxLength="500"
             android:singleLine="true"
-            android:textSize="18sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/abeezee"
-            android:textStyle="italic"/>
+            android:textSize="18sp"
+            android:textStyle="italic" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -109,83 +110,81 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
-        app:hintTextColor="@color/white"
         android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
         app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="@id/guideline4">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@drawable/rounded_edittext"
+            android:fontFamily="@font/abeezee"
             android:inputType="text"
             android:maxLength="500"
             android:singleLine="true"
-            android:textSize="18sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/abeezee"
-            android:textStyle="italic"/>
+            android:textSize="18sp"
+            android:textStyle="italic" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputGoogle"
+    <Button
+        android:id="@+id/editButtonGoogle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingresar con Google"
-        app:hintTextColor="@color/white"
-        android:textColorHint="@color/white"
+        android:layout_height="55dp"
+        android:background="@drawable/button_google"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/googleg_standard_color_18"
+        android:fontFamily="@font/abeezee"
+        android:foregroundTint="#FFFFFF"
+        android:hint="Google"
+        android:text="Ingresar con Google"
+        android:textColor="@color/white"
+        android:textColorLink="#FFFFFF"
+        android:textSize="18dp"
+        android:textAlignment="textStart"
+        android:paddingLeft="60dp"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
         app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/guideline5">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/rounded_edittext"
-            android:inputType="text"
-            android:maxLength="500"
-            android:singleLine="true"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/abeezee"
-            android:textStyle="italic"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toTopOf="@id/guideline5"
+        app:strokeColor="#FFFFFF" />
 
     <TextView
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:fontFamily="@font/abeezee"
         android:text="Ingresar"
-        android:textStyle="italic"
         android:textColor="@color/black"
         android:textSize="30dp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@id/guideline7"
         app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/guideline8"/>
+        app:layout_constraintTop_toTopOf="@id/guideline8" />
 
     <Button
         android:id="@+id/login_button"
-        android:hint="Ingresar"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_boton"
-        android:padding="19dp"
-        android:drawableBottom="@drawable/baseline_arrow_forward_24"
-        android:height="5dp"
         android:width="5dp"
+        android:height="5dp"
+        android:background="@drawable/rounded_boton"
+        android:drawableBottom="@drawable/baseline_arrow_forward_24"
+        android:hint="Ingresar"
+        android:padding="19dp"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@id/guideline7" />
 
     <Button
         android:id="@+id/singin_button"
-        android:hint="Crear usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="Crear usuario"
         android:text="Crear cuenta"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/guideline9"

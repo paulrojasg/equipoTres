@@ -5,7 +5,8 @@ import android.os.Bundle
 import com.example.project2.R
 
 enum class ProviderType {
-    BASIC
+    BASIC,
+    GOOGLE
 }
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

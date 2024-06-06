@@ -17,17 +17,27 @@ import com.example.project2.databinding.FragmentLoginBinding
 import com.example.project2.view.MainActivity
 import com.example.project2.view.ProviderType
 import com.example.project2.viewmodel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
+    private val GOOGLE_SIGN_IN = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater)
+        isSession()
         return binding.root
     }
 
@@ -57,6 +67,20 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Navegación fallida", Toast.LENGTH_LONG).show()
             }
         }
+        binding.editButtonGoogle.setOnClickListener {
+            try {
+                val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken("45813419426-2iepbfrd9ohn107uk2vsakk5d0kl7u6s.apps.googleusercontent.com")
+                    .requestEmail()
+                    .build()
+
+                val googleClient = GoogleSignIn.getClient(requireActivity(), googleConf)
+                googleClient.signOut()
+                startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+            } catch(e: Exception) {
+                Toast.makeText(requireContext(), "No se pudo acceder a Google", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun loginUser(){
@@ -65,6 +89,11 @@ class LoginFragment : Fragment() {
         if (email.isNotEmpty() && pass.isNotEmpty()){
             loginViewModel.loginUser(email,pass){ isLogin ->
                 if (isLogin){
+                    //Guardar la session
+                    val sharedPreferences = requireContext().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                    sharedPreferences.putString("email", email)
+                    sharedPreferences.apply()
+
                     findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
                 }else {
                     Toast.makeText(requireContext(), "No se pudo acceder al usuario", Toast.LENGTH_LONG).show()
@@ -74,14 +103,31 @@ class LoginFragment : Fragment() {
             Toast.makeText(requireContext(), "Verifica que hayas llenado todos los campos correctamente", Toast.LENGTH_LONG).show()
         }
     }
-
-    /*
-    private fun goToHome(email: String?, provider: ProviderType){
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("email",email)
-            putExtra("provider",provider.name)
+    private fun isSession(){
+        val sharedPreferences = requireContext().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val email = sharedPreferences.getString("email", null)
+        loginViewModel.session(email){ isEnableView ->
+            if (isEnableView){
+                findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
+            }
         }
-        startActivity(intent)
     }
-    */
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==GOOGLE_SIGN_IN){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val account = task.getResult(ApiException::class.java)
+            if(account != null){
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
+                    } else {
+                        Toast.makeText(requireContext(), "No pudimos autentificar tu cuenta", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
 }
