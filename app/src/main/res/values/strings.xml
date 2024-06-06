@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">project2</string>
+    <string name="app_name">Bloom-do</string>
     <string name="edit_task_title">Editar o Eliminar Tarea</string>
     <string name="login_title">Bienvenido a To-Do List</string>
     <string name="singin_title">Crear Cuenta</string>
