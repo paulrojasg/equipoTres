@@ -1,7 +1,8 @@
 package com.example.project2.viewmodel
 
-import android.util.Log
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.project2.R
 import com.example.project2.repository.LoginRepository
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,7 +21,6 @@ class LoginViewModel : ViewModel() {
             FirebaseAuth.getInstance()
                 .signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener {
-                    Log.d("!!!!!!!!!!!!!!!!!", it.result?.user?.email ?: "")
                     if (it.isSuccessful) {
                         isLogin(true)
                     } else {
