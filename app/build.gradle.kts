@@ -84,7 +84,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0")
 
     // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0")) 
 
     //lottiejson
     val lottieVersion = "3.4.0"
@@ -94,6 +94,5 @@ dependencies {
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-
 
 }

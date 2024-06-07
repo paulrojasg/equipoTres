@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
         binding.editButtonGoogle.setOnClickListener {
             try {
                 val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken("45813419426-2iepbfrd9ohn107uk2vsakk5d0kl7u6s.apps.googleusercontent.com")
+                    .requestIdToken(getString(R.string.default_web_client_id))
                     .requestEmail()
                     .build()
 
@@ -117,16 +117,22 @@ class LoginFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==GOOGLE_SIGN_IN){
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val account = task.getResult(ApiException::class.java)
-            if(account != null){
-                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
-                    } else {
-                        Toast.makeText(requireContext(), "No pudimos autentificar tu cuenta", Toast.LENGTH_LONG).show()
+            try{
+                val account = task.getResult(ApiException::class.java)
+                if(account != null){
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                        if(it.isSuccessful){
+                            findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "No pudimos autentificar tu cuenta", Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
+            } catch (e : ApiException){
+                val errorMessage = e.message ?: "Error en el catch"
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Error en el catch", Toast.LENGTH_LONG).show()
             }
         }
     }
