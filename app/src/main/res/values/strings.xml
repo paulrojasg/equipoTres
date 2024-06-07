@@ -15,5 +15,5 @@
     <string name="detalle_tarea">Detalle tarea</string>
     <string name="categoria">Categoria</string>
     <string name="prioridad">Prioridad</string>
-
+    <string name="default_web_client_id" translatable="false">45813419426-2iepbfrd9ohn107uk2vsakk5d0kl7u6s.apps.googleusercontent.com</string>
 </resources>
