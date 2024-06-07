@@ -136,14 +136,16 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/circleImage"
+            android:id="@+id/flowerImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/rounded_boton"
-            app:layout_constraintStart_toStartOf="@+id/guidelinehorforimage"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="@+id/guidelineverforimage"
-            tools:layout_editor_absoluteX="165dp"
-            tools:layout_editor_absoluteY="154dp" />
+            android:scaleType="centerCrop"
+            />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
