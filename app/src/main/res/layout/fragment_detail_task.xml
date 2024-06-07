@@ -144,6 +144,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/abeezee"
             android:padding="8dp"
+            tools:ignore="MissingConstraints"
             android:text="@string/descripci_n"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -156,6 +157,6 @@
         android:layout_height="80dp"
         android:src="@drawable/rounded_boton"
         tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="154dp" />
+        tools:layout_editor_absoluteY="168dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
