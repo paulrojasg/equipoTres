@@ -1,22 +1,21 @@
 package com.example.project2.view.fragment
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.project2.databinding.FragmentDetailBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.viewmodel.TodoTaskViewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private val app: TodoTaskViewModel by viewModels()
@@ -26,35 +25,50 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         controladores()
+        setToolbar()
         catchIncomingData()
     }
 
     private fun controladores() {
-        //Lógica para la flecha de atrás
+        // Lógica para la flecha de atrás
     }
 
-    private fun catchIncomingData(){
+    private fun setToolbar() {
+        val toolbar: Toolbar = binding.contentToolbar.toolbarDetail
+        toolbar.setNavigationOnClickListener {
+            // Navegar a otro fragmento cuando se hace clic en el icono de navegación
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun catchIncomingData() {
         val receivedBundle = arguments
         receivedTask = receivedBundle?.getSerializable("clave") as TodoTask
-        // Cargar la imagen desde la URL
-        //Editar las variables
-//        Glide.with(this)
-//            .load(receivedTask.imagePath)
-//            .into(binding.petBreedImage)
-//        binding.numberAppointmnet.text = "#${receivedAppointment.id.toString()}"
-//        binding.titleTextDetailsName.text = receivedAppointment.name_pet
-//        binding.petBreedName.text = receivedAppointment.breed
-//        binding.ownerPhone.text = "Telefono: ${receivedAppointment.phone_number}"
-//        binding.ownerName.text = "Propietario: ${receivedAppointment.name_owner}"
-//        binding.petSymptoms.text = receivedAppointment.symptoms
-    }
 
+        Log.d("DetailFragment", "Image URL: ${receivedTask.imagePath}") // Verifica la URL en los logs
+
+        // Cargar la imagen desde la URL en el ImageView
+        Glide.with(this)
+            .load("https://loremflickr.com/${receivedTask.imagePath}")
+            .transform(CircleCrop())
+            .into(binding.flowerImage)
+
+        // Ejemplos de cómo editar las variables
+        binding.tvTaskName.text = receivedTask.name
+
+        // Convierte la descripción a Editable antes de establecer el texto
+        val editableDescription: Editable = Editable.Factory.getInstance().newEditable(receivedTask.description)
+        binding.tvTaskDescription.text = editableDescription
+
+        binding.tvTaksPriority.text = receivedTask.priority
+        binding.TvTaksCategory.text = receivedTask.category
+    }
 }
