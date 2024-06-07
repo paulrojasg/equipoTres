@@ -117,16 +117,21 @@ class LoginFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==GOOGLE_SIGN_IN){
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val account = task.getResult(ApiException::class.java)
-            if(account != null){
-                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
-                    } else {
-                        Toast.makeText(requireContext(), "No pudimos autentificar tu cuenta", Toast.LENGTH_LONG).show()
+            try {
+                val account = task.getResult(ApiException::class.java)
+                if(account != null){
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                        if(it.isSuccessful){
+                            findNavController().navigate(R.id.action_loginFragment_to_viewTaskFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "No pudimos autentificar tu cuenta", Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
+            } catch(e: Exception) {
+                Log.e("Error al momento de ingresar a Google", e.toString())
+                Toast.makeText(requireContext(), "No se pudo acceder a Google", Toast.LENGTH_LONG).show()
             }
         }
     }
