@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.project2.databinding.FragmentDetailBinding
 import com.example.project2.model.TodoTask
 import com.example.project2.viewmodel.TodoTaskViewModel
@@ -21,31 +22,39 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout using View Binding
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        controladores()
         catchIncomingData()
+    }
+
+    private fun controladores() {
+        // Lógica para la flecha de atrás
     }
 
     private fun catchIncomingData() {
         val receivedBundle = arguments
         receivedTask = receivedBundle?.getSerializable("clave") as TodoTask
 
-
         Log.d("DetailFragment", "Image URL: ${receivedTask.imagePath}") // Verifica la URL en los logs
 
         // Cargar la imagen desde la URL en el ImageView
         Glide.with(this)
-            .load(receivedTask.imagePath)
+            .load("https://loremflickr.com/${receivedTask.imagePath}")
+            .transform(CircleCrop())
+        //    .placeholder(R.drawable.placeholder_image)
+        //    .error(R.drawable.error_image)
             .into(binding.flowerImage)
 
         // Ejemplos de cómo editar las variables
         binding.tvTaskName.text = receivedTask.name
         binding.tvTaskDescription.text = receivedTask.description
+        binding.tvTaksPriority.text = receivedTask.priority
+        binding.TvTaksCategory.text = receivedTask.category
     }
 }

@@ -90,7 +90,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/circleImage"
             app:layout_constraintVertical_bias="0.33">
 
         </androidx.cardview.widget.CardView>
@@ -109,7 +108,7 @@
             app:layout_constraintVertical_bias="0.806">
 
             <Button
-                android:id="@+id/btnCategory"
+                android:id="@+id/TvTaksCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -121,7 +120,7 @@
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/btnPriority"
+                android:id="@+id/tvTaksPriority"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -135,15 +134,18 @@
 
         </LinearLayout>
 
-        <ImageView
+
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/flowerImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="@+id/guidelineverforimage"
+            android:background="@drawable/photo_circular"
             android:scaleType="centerCrop"
             />
 
