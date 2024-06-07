@@ -41,6 +41,9 @@
             android:id="@+id/action_fragment_viewtask_to_editTaskFragment"
             app:destination="@id/editTaskFragment" />
         <action
+            android:id="@+id/action_fragment_viewtask_to_detailTaskFragment"
+            app:destination="@id/detailTaskFragment" />
+        <action
             android:id="@+id/action_fragment_viewtask_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>    
