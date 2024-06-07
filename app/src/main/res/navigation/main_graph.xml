@@ -65,4 +65,10 @@
         android:id="@+id/action_editTaskFragment_to_viewTaskFragment"
         app:destination="@id/viewTaskFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailTaskFragment"
+        android:name="com.example.project2.view.fragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+    </fragment>
 </navigation>
